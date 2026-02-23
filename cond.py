@@ -26,3 +26,21 @@ def fermi_dirac_diff(tbmodel: tb_model, klist: list, mu: float, T: float) -> flo
     return -beta * f * (1.0 - f)
 
     
+if __name__ == "__main__":
+    from pythtb_respack import tb_model
+    import matplotlib.pyplot as plt
+
+    # 1D tight-binding model
+    lat = [[1.0], [0.0]]
+    orb = [[0.0], [0.0]]
+    hopp = [[-1.0, 0, 0]]
+    tbmodel = tb_model(1, 1, lat, orb, hopp)
+
+    klist = np.linspace(-np.pi, np.pi, 100)
+    v = group_velocity_1d(tbmodel, klist)
+    plt.plot(klist, v)
+    plt.xlabel("k")
+    plt.ylabel("Group Velocity")
+    plt.title("Group Velocity of 1D Tight-Binding Model")
+    plt.grid()
+    plt.show()
